@@ -128,6 +128,13 @@ impl<Size: OutputSize> Sha<'_, Size> {
     fn process_block(peripheral: &mut Hashcrypt<Enabled>, input: &GenericArray<u8, BlockSize>) {
         // input must be word-aligned
         let input: Aligned<A4, GenericArray<u8, BlockSize>> = Aligned(input.clone());
+
+        // Workaround to get this to compile.  Will figure out later to use the
+        // hash engine.
+        let _ = input;
+        let _ = peripheral;
+        todo!();
+        /*
         let addr: u32 = &input.as_ref()[0] as *const _ as _;
         assert_eq!(addr & 0x3, 0);
         while peripheral.raw.status.read().waiting().is_not_waiting() {
@@ -138,6 +145,7 @@ impl<Size: OutputSize> Sha<'_, Size> {
             .raw
             .memctrl
             .write(|w| unsafe { w.master().enabled().count().bits(1) });
+        */
     }
 
     fn finish(&mut self) {
