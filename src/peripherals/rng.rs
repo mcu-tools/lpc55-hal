@@ -11,10 +11,10 @@ crate::wrap_stateful_peripheral!(Rng, RNG);
 #[derive(Debug)]
 // not sure why this kind of thing is not in `svd2rust`?
 pub struct ModuleId {
-    id: u16,
-    maj_rev: u8,
-    min_rev: u8,
-    aperture: u8,
+    pub id: u16,
+    pub maj_rev: u8,
+    pub min_rev: u8,
+    pub aperture: u8,
 }
 
 impl Rng {}
